@@ -409,12 +409,13 @@ void ZEDWrapperNodelet::onInit()
   // Image publishers
   image_transport::ImageTransport it_zed(mNhNs);
 
-  mPubRgb = it_zed.advertiseCamera(rgb_topic, 1);  // rgb
-  NODELET_INFO_STREAM("Advertised on topic " << mPubRgb.getTopic());
-  NODELET_INFO_STREAM("Advertised on topic " << mPubRgb.getInfoTopic());
+  //mPubRgb = it_zed.advertiseCamera(rgb_topic, 1);  // rgb
+  //NODELET_INFO_STREAM("Advertised on topic " << mPubRgb.getTopic());
+  //NODELET_INFO_STREAM("Advertised on topic " << mPubRgb.getInfoTopic());
   mPubRawRgb = it_zed.advertiseCamera(rgb_raw_topic, 1);  // rgb raw
   NODELET_INFO_STREAM("Advertised on topic " << mPubRawRgb.getTopic());
   NODELET_INFO_STREAM("Advertised on topic " << mPubRawRgb.getInfoTopic());
+  /*
   mPubLeft = it_zed.advertiseCamera(left_topic, 1);  // left
   NODELET_INFO_STREAM("Advertised on topic " << mPubLeft.getTopic());
   NODELET_INFO_STREAM("Advertised on topic " << mPubLeft.getInfoTopic());
@@ -467,7 +468,7 @@ void ZEDWrapperNodelet::onInit()
   // PointCloud publishers
   mPubCloud = mNhNs.advertise<sensor_msgs::PointCloud2>(pointcloud_topic, 1);
   NODELET_INFO_STREAM("Advertised on topic " << mPubCloud.getTopic());
-
+  */
   if (mMappingEnabled)
   {
     mPubFusedCloud = mNhNs.advertise<sensor_msgs::PointCloud2>(pointcloud_fused_topic, 1);
@@ -482,18 +483,19 @@ void ZEDWrapperNodelet::onInit()
   }
 
   // Odometry and Pose publisher
-  mPubPose = mNhNs.advertise<geometry_msgs::PoseStamped>(poseTopic, 1);
-  NODELET_INFO_STREAM("Advertised on topic " << mPubPose.getTopic());
+  //mPubPose = mNhNs.advertise<geometry_msgs::PoseStamped>(poseTopic, 1);
+  //NODELET_INFO_STREAM("Advertised on topic " << mPubPose.getTopic());
 
-  mPubPoseCov = mNhNs.advertise<geometry_msgs::PoseWithCovarianceStamped>(pose_cov_topic, 1);
-  NODELET_INFO_STREAM("Advertised on topic " << mPubPoseCov.getTopic());
+  //mPubPoseCov = mNhNs.advertise<geometry_msgs::PoseWithCovarianceStamped>(pose_cov_topic, 1);
+  //NODELET_INFO_STREAM("Advertised on topic " << mPubPoseCov.getTopic());
 
-  mPubOdom = mNhNs.advertise<nav_msgs::Odometry>(odometryTopic, 1);
-  NODELET_INFO_STREAM("Advertised on topic " << mPubOdom.getTopic());
+  //mPubOdom = mNhNs.advertise<nav_msgs::Odometry>(odometryTopic, 1);
+  //NODELET_INFO_STREAM("Advertised on topic " << mPubOdom.getTopic());
 
   // Camera Path
   if (mPathPubRate > 0)
   {
+    /*
     mPubOdomPath = mNhNs.advertise<nav_msgs::Path>(odom_path_topic, 1, true);
     NODELET_INFO_STREAM("Advertised on topic " << mPubOdomPath.getTopic());
     mPubMapPath = mNhNs.advertise<nav_msgs::Path>(map_path_topic, 1, true);
@@ -509,6 +511,7 @@ void ZEDWrapperNodelet::onInit()
 
       NODELET_DEBUG_STREAM("Path vector sizes: " << mOdomPath.size() << " " << mMapPath.size());
     }
+    */
   }
   else
   {
