@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  zed_ros_driver_pkg:           # <-- YOUR TODO: change to name of your repository
+    runtime: nvidia
+    depends_on: 
+      - master          
+      - <package>          # <-- YOUR TODO: change dependencies to other packages
+    build:
+      context: .  
+      dockerfile: Dockerfile
+    image: zed_ros_driver_pkg:latest        # <-- YOUR TODO: change to name of your repository
+    restart: unless-stopped
+    environment:
+      - PACKAGE_NAME=zed_ros_driver_pkg     # <-- YOUR TODO: change to name of your repository
+      - ROS_MASTER_URI=http://master:11311 
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ./:/ws/src/zed_ros_driver_pkg       # <-- YOUR TODO: change to name of your repository
+    entrypoint: chmod +x /ws/src/zed_ros_driver_pkg/docker-entrypoint.sh && /ws/src/zed_ros_driver_pkg/docker-entrypoint.sh  # <-- YOUR TODO: change to name of your repository
+    command: sh -c "while true; do sleep 1; done"    
+    privileged: true
+# networks:
+#   ros_network:
+#     driver: bridge
